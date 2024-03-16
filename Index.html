@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Counter Page</title>
+<style>
+  /* CSS styles */
+  #container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  #counter {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  #error {
+    color: red;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="counter">0</div>
+  <button id="increment">Increment</button>
+  <button id="decrement">Decrement</button>
+  <button id="clear">Clear</button>
+  <div id="error">Cannot decrement below 0!</div>
+</div>
+
+<script>
+  // JavaScript code
+  document.addEventListener("DOMContentLoaded", function() {
+    const counterDisplay = document.getElementById("counter");
+    const incrementButton = document.getElementById("increment");
+    const decrementButton = document.getElementById("decrement");
+    const clearButton = document.getElementById("clear");
+    const errorDisplay = document.getElementById("error");
+
+    let count = 0;
+
+    function updateCounter() {
+      counterDisplay.textContent = count;
+      if (count === 0) {
+        decrementButton.disabled = true;
+        errorDisplay.style.display = "block";
+      } else {
+        decrementButton.disabled = false;
+        errorDisplay.style.display = "none";
+      }
+      if (count > 1) {
+        clearButton.style.display = "block";
+      } else {
+        clearButton.style.display = "none";
+      }
+    }
+
+    incrementButton.addEventListener("click", function() {
+      count++;
+      updateCounter();
+    });
+
+    decrementButton.addEventListener("click", function() {
+      if (count > 0) {
+        count--;
+        updateCounter();
+      }
+    });
+
+    clearButton.addEventListener("click", function() {
+      count = 0;
+      updateCounter();
+    });
+
+    // Initial update
+    updateCounter();
+  });
+</script>
+
+</body>
+</html>
